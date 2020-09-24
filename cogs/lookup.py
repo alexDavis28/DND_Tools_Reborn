@@ -19,6 +19,11 @@ class Lookup(commands.Cog):
     async def search(self, ctx, *, text):
         url = f"https://api.open5e.com/search/?format=json&text=%22{text}%22"
         page = requests.get(url).json()
+
+        if not(page["results"]):
+            await ctx.send("No results found.")
+            return
+
         result = page["results"][0]
         embed = discord.Embed(title=result["name"], description=result["highlighted"],
                               color=discord.Colour.from_rgb(236, 33, 39))
@@ -28,6 +33,11 @@ class Lookup(commands.Cog):
     async def spell(self, ctx, *, text):
         url = f"https://api.open5e.com/spells/?format=json&search={text}"
         page = requests.get(url).json()
+
+        if not (page["results"]):
+            await ctx.send("No results found.")
+            return
+
         results = page["results"]
         result = results[0]
         for r in results:
@@ -53,6 +63,11 @@ class Lookup(commands.Cog):
         url = f"https://api.open5e.com/monsters/?format=json&search={text}"
         page = requests.get(url).json()
         results = page["results"]
+
+        if not (page["results"]):
+            await ctx.send("No results found.")
+            return
+
         result = results[0]
         for r in results:
             if r["name"].lower() == text.lower():
@@ -88,10 +103,15 @@ class Lookup(commands.Cog):
     async def condition(self, ctx, *, text):
         url = f"https://api.open5e.com/conditions/?format=json&search={text}"
         page = requests.get(url).json()
+
+        if not (page["results"]):
+            await ctx.send("No results found.")
+            return
+
         results = page["results"]
         result = results[0]
         for r in results:
-            if r["name"].lower() == atext.lower():
+            if r["name"].lower() == text.lower():
                 result = r
 
         embed = discord.Embed(title=result["name"], color=discord.Colour.from_rgb(0, 255, 0))
@@ -103,6 +123,11 @@ class Lookup(commands.Cog):
     async def race(self, ctx, *, text):
         url = f"https://api.open5e.com/races/?format=json&search={text}"
         page = requests.get(url).json()
+
+        if not (page["results"]):
+            await ctx.send("No results found.")
+            return
+
         results = page["results"]
         result = results[0]
         for r in results:
@@ -126,6 +151,11 @@ class Lookup(commands.Cog):
     async def _class(self, ctx, *, text):
         url = f"https://api.open5e.com/classes/?format=json&search={text}"
         page = requests.get(url).json()
+
+        if not (page["results"]):
+            await ctx.send("No results found.")
+            return
+
         results = page["results"]
         result = results[0]
         for r in results:
@@ -146,6 +176,11 @@ class Lookup(commands.Cog):
     async def class_description(self, ctx, *, text):
         url = f"https://api.open5e.com/classes/?format=json&search={text}"
         page = requests.get(url).json()
+
+        if not (page["results"]):
+            await ctx.send("No results found.")
+            return
+
         results = page["results"]
         result = results[0]
         for r in results:
@@ -167,6 +202,11 @@ class Lookup(commands.Cog):
     async def class_table(self, ctx, dnd_class, level_num=0):
         url = f"https://api.open5e.com/classes/?format=json&search={dnd_class}"
         page = requests.get(url).json()
+
+        if not (page["results"]):
+            await ctx.send("No results found.")
+            return
+
         results = page["results"]
         result = results[0]
         for r in results:
@@ -210,6 +250,11 @@ class Lookup(commands.Cog):
     async def weapon(self, ctx, *, text):
         url = f"https://api.open5e.com/weapons/?format=json&search={text}"
         page = requests.get(url).json()
+
+        if not (page["results"]):
+            await ctx.send("No results found.")
+            return
+
         results = page["results"]
         result = results[0]
         for r in results:
